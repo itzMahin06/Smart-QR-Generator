@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart QR | By MAHIIN</title>
+    <title>স্মার্ট কিউআর | মাহিন-এর সৌজন্যে</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         @import url('https://fonts.maateen.me/solaiman-lipi/font.css');
@@ -12,13 +12,13 @@
             --secondary: #10b981;
             --dark: #1e293b;
             --light: #f8fafc;
-            --accent: #ef4444;
+            --accent: #accent;
         }
 
         * { box-sizing: border-box; }
 
         body {
-            font-family: 'SolaimanLipi, sans-serif;
+            font-family: 'SolaimanLipi', sans-serif;
             margin: 0;
             background-color: #f1f5f9;
             color: var(--dark);
@@ -64,7 +64,7 @@
 
         .header-text span {
             font-weight: 600;
-            color: var(--accent);
+            color: #ef4444;
         }
 
         /* Layout Structure */
@@ -91,7 +91,7 @@
             display: block;
             font-weight: 600;
             margin-bottom: 8px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #475569;
         }
 
@@ -100,7 +100,7 @@
             padding: 12px;
             border: 2px solid #e2e8f0;
             border-radius: 10px;
-            font-family: SolaimanLipi;
+            font-family: 'SolaimanLipi', sans-serif;
             transition: border-color 0.3s;
         }
 
@@ -127,6 +127,7 @@
             cursor: pointer;
             transition: transform 0.2s, background 0.3s;
             margin-top: 10px;
+            font-family: 'SolaimanLipi', sans-serif;
         }
 
         button:active { transform: scale(0.98); }
@@ -170,6 +171,7 @@
             text-align: center;
             width: 100%;
             max-width: 400px;
+            font-family: 'SolaimanLipi', sans-serif;
         }
 
         /* Mobile Responsiveness */
@@ -193,10 +195,10 @@
 
     <header>
         <div class="header-container">
-            <img src="https://i.ibb.co.com/j9SZjws0/20251220-114738-0000.jpg" alt="Smart QR Logo" class="site-logo">
+            <img src="https://i.ibb.co.com/kgXV9VSn/20260114-155723-0000.png" alt="Smart QR Logo" class="site-logo">
             <div class="header-text">
-                <h1>Smart QR</h1>
-                <p>Premium QR Customizer <span>By MAHIIN</span></p>
+                <h1>স্মার্ট কিউআর (Smart QR)</h1>
+                <p>প্রিমিয়াম কিউআর কাস্টমাইজার <span>ডেভেলপ: মাহিন</span></p>
             </div>
         </div>
     </header>
@@ -204,39 +206,39 @@
     <main class="main-wrapper">
         <section class="panel">
             <div class="input-group">
-                <label>QR Content (URL or Text)</label>
-                <input type="text" id="qr-data" placeholder="e.g. https://google.com" value="">
+                <label>কিউআর কন্টেন্ট (লিঙ্ক বা টেক্সট)</label>
+                <input type="text" id="qr-data" placeholder="যেমন: https://google.com" value="">
             </div>
 
             <div class="color-row">
                 <div class="input-group">
-                    <label>QR Color</label>
+                    <label>কিউআর-এর রং</label>
                     <input type="color" id="qr-color" value="#000000">
                 </div>
                 <div class="input-group">
-                    <label>Background</label>
+                    <label>ব্যাকগ্রাউন্ড রং</label>
                     <input type="color" id="bg-color" value="#ffffff">
                 </div>
             </div>
 
             <div class="input-group">
-                <label>QR Title (Text on Image)</label>
-                <input type="text" id="qr-title" placeholder="e.g. Scan to Pay">
+                <label>কিউআর টাইটেল (ছবির নিচের লেখা)</label>
+                <input type="text" id="qr-title" placeholder="যেমন: পেমেন্ট করতে স্ক্যান করুন">
             </div>
 
             <div class="input-group">
-                <label>Logo URL (Middle Center)</label>
-                <input type="text" id="logo-url" placeholder="Paste image link here">
+                <label>লোগো লিঙ্ক (মাঝখানে দেখানোর জন্য)</label>
+                <input type="text" id="logo-url" placeholder="ইমেজ লিঙ্ক এখানে পেস্ট করুন">
             </div>
 
-            <button id="generate-btn">Generate HD Design</button>
+            <button id="generate-btn">এইচডি ডিজাইন তৈরি করুন</button>
         </section>
 
         <section class="preview-panel">
             <div id="canvas-container">
                 <canvas id="qr-canvas"></canvas>
             </div>
-            <a id="download-link" class="download-btn">Download High-Quality PNG</a>
+            <a id="download-link" class="download-btn">হাই-কোয়ালিটি পিএনজি ডাউনলোড করুন</a>
         </section>
     </main>
 
@@ -257,7 +259,7 @@
 
             // Setup HD dimensions
             const qrSize = 1000;
-            const padding = 80; // Added padding for better scanning
+            const padding = 80; 
             const textSpace = title ? 140 : 0;
             
             canvas.width = qrSize + (padding * 2);
@@ -275,13 +277,13 @@
             qrImage.src = qrUrl;
 
             qrImage.onload = () => {
-                // Draw QR Image with padding offset
                 ctx.drawImage(qrImage, padding, padding, qrSize, qrSize);
 
                 // 3. Add Title
                 if (title) {
                     ctx.fillStyle = `#${color}`;
-                    ctx.font = "bold 60px SolaimanLipi";
+                    // Use SolaimanLipi for the title on canvas
+                    ctx.font = "bold 60px SolaimanLipi, Arial";
                     ctx.textAlign = "center";
                     ctx.fillText(title, canvas.width / 2, qrSize + padding + 80);
                 }
@@ -296,7 +298,6 @@
                         const lx = (canvas.width / 2) - (lSize / 2);
                         const ly = (padding + (qrSize / 2)) - (lSize / 2);
                         
-                        // Logo background square for clarity
                         ctx.fillStyle = `#${bgcolor}`;
                         ctx.fillRect(lx - 10, ly - 10, lSize + 20, lSize + 20);
                         
@@ -316,13 +317,11 @@
             downloadBtn.download = "SmartQR_HD.png";
             downloadBtn.style.display = "block";
             
-            // Scroll to preview on mobile
             if(window.innerWidth < 850) {
                 downloadBtn.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
-        // Generate a default QR on load
         window.onload = generateQR;
     </script>
 </body>
