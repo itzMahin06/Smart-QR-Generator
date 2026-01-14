@@ -6,6 +6,7 @@
     <title>Smart QR | By MAHIIN</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        @import url('https://fonts.maateen.me/solaiman-lipi/font.css');
         :root {
             --primary: #2563eb;
             --secondary: #10b981;
@@ -17,7 +18,7 @@
         * { box-sizing: border-box; }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'SolaimanLipi','Poppins', sans-serif;
             margin: 0;
             background-color: #f1f5f9;
             color: var(--dark);
@@ -99,7 +100,7 @@
             padding: 12px;
             border: 2px solid #e2e8f0;
             border-radius: 10px;
-            font-family: inherit;
+            font-family: inherit, SolaimanLipi;
             transition: border-color 0.3s;
         }
 
@@ -280,7 +281,7 @@
                 // 3. Add Title
                 if (title) {
                     ctx.fillStyle = `#${color}`;
-                    ctx.font = "bold 60px Poppins";
+                    ctx.font = "bold 60px Poppins, SolaimanLipi";
                     ctx.textAlign = "center";
                     ctx.fillText(title, canvas.width / 2, qrSize + padding + 80);
                 }
