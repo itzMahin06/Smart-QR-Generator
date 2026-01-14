@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart QR | By MAHIIN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --accent: #ef4444;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: white;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .site-logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: var(--primary);
+            letter-spacing: -1px;
+        }
+
+        .header-text p {
+            margin: 0;
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #64748b;
+        }
+
+        .header-text span {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Layout Structure */
+        .main-wrapper {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        /* Form / Config Panel */
+        .panel {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+        }
+
+        .input-group { margin-bottom: 18px; }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            color: #475569;
+        }
+
+        input[type="text"], input[type="color"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .color-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+            margin-top: 10px;
+        }
+
+        button:active { transform: scale(0.98); }
+
+        /* Preview Panel */
+        .preview-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        #canvas-container {
+            width: 100%;
+            max-width: 400px;
+            background: #cbd5e1;
+            padding: 10px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto !important;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .download-btn {
+            display: none;
+            text-decoration: none;
+            background: var(--secondary);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 850px) {
+            .main-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .header-text h1 { font-size: 1.5rem; }
+        }
+
+        @media (min-width: 600px) {
+            .header-container {
+                flex-direction: row;
+                justify-content: center;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <img src="https://i.ibb.co.com/j9SZjws0/20251220-114738-0000.jpg" alt="Smart QR Logo" class="site-logo">
+            <div class="header-text">
+                <h1>Smart QR</h1>
+                <p>Premium QR Customizer <span>By MAHIIN</span></p>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-wrapper">
+        <section class="panel">
+            <div class="input-group">
+                <label>QR Content (URL or Text)</label>
+                <input type="text" id="qr-data" placeholder="e.g. https://google.com" value="https://facebook.com">
+            </div>
+
+            <div class="color-row">
+                <div class="input-group">
+                    <label>QR Color</label>
+                    <input type="color" id="qr-color" value="#000000">
+                </div>
+                <div class="input-group">
+                    <label>Background</label>
+                    <input type="color" id="bg-color" value="#ffffff">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>QR Title (Text on Image)</label>
+                <input type="text" id="qr-title" placeholder="e.g. Scan to Pay">
+            </div>
+
+            <div class="input-group">
+                <label>Logo URL (Middle Center)</label>
+                <input type="text" id="logo-url" placeholder="Paste image link here">
+            </div>
+
+            <button id="generate-btn">Generate HD Design</button>
+        </section>
+
+        <section class="preview-panel">
+            <div id="canvas-container">
+                <canvas id="qr-canvas"></canvas>
+            </div>
+            <a id="download-link" class="download-btn">Download High-Quality PNG</a>
+        </section>
+    </main>
+
+    <script>
+        const canvas = document.getElementById('qr-canvas');
+        const ctx = canvas.getContext('2d');
+        const generateBtn = document.getElementById('generate-btn');
+        const downloadBtn = document.getElementById('download-link');
+
+        generateBtn.addEventListener('click', generateQR);
+
+        function generateQR() {
+            const data = encodeURIComponent(document.getElementById('qr-data').value || "Smart QR");
+            const color = document.getElementById('qr-color').value.substring(1);
+            const bgcolor = document.getElementById('bg-color').value.substring(1);
+            const title = document.getElementById('qr-title').value;
+            const logoUrl = document.getElementById('logo-url').value;
+
+            // Setup HD dimensions
+            const qrSize = 1000;
+            const padding = 80; // Added padding for better scanning
+            const textSpace = title ? 140 : 0;
+            
+            canvas.width = qrSize + (padding * 2);
+            canvas.height = qrSize + (padding * 2) + textSpace;
+
+            // 1. Fill Background
+            ctx.fillStyle = `#${bgcolor}`;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 2. Fetch QR
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${qrSize}x${qrSize}&data=${data}&color=${color}&bgcolor=${bgcolor}&margin=0`;
+            
+            const qrImage = new Image();
+            qrImage.crossOrigin = "anonymous";
+            qrImage.src = qrUrl;
+
+            qrImage.onload = () => {
+                // Draw QR Image with padding offset
+                ctx.drawImage(qrImage, padding, padding, qrSize, qrSize);
+
+                // 3. Add Title
+                if (title) {
+                    ctx.fillStyle = `#${color}`;
+                    ctx.font = "bold 60px Poppins";
+                    ctx.textAlign = "center";
+                    ctx.fillText(title, canvas.width / 2, qrSize + padding + 80);
+                }
+
+                // 4. Handle Logo
+                if (logoUrl) {
+                    const logo = new Image();
+                    logo.crossOrigin = "anonymous";
+                    logo.src = logoUrl;
+                    logo.onload = () => {
+                        const lSize = qrSize * 0.22;
+                        const lx = (canvas.width / 2) - (lSize / 2);
+                        const ly = (padding + (qrSize / 2)) - (lSize / 2);
+                        
+                        // Logo background square for clarity
+                        ctx.fillStyle = `#${bgcolor}`;
+                        ctx.fillRect(lx - 10, ly - 10, lSize + 20, lSize + 20);
+                        
+                        ctx.drawImage(logo, lx, ly, lSize, lSize);
+                        finishImage();
+                    };
+                    logo.onerror = () => finishImage();
+                } else {
+                    finishImage();
+                }
+            };
+        }
+
+        function finishImage() {
+            const dataUrl = canvas.toDataURL("image/png");
+            downloadBtn.href = dataUrl;
+            downloadBtn.download = "SmartQR_HD.png";
+            downloadBtn.style.display = "block";
+            
+            // Scroll to preview on mobile
+            if(window.innerWidth < 850) {
+                downloadBtn.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Generate a default QR on load
+        window.onload = generateQR;
+    </script>
+</body>
+</html>
